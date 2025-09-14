@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Github, Linkedin, Mail, MessageCircle } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 export default function Hero() {
   const scrollToChat = () => {
@@ -17,14 +18,30 @@ export default function Hero() {
     <section id="home" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center">
-          {/* Profile Image Placeholder */}
+          {/* Profile Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="mx-auto mb-8 w-40 h-40 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-4xl font-bold shadow-2xl"
+            className="mx-auto mb-8 w-40 h-40 rounded-full overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800"
           >
-            MR
+            <Image
+              src="/profile.jpg"
+              alt="Md. Mizanur Rahman - IT Professional"
+              width={160}
+              height={160}
+              className="w-full h-full object-cover"
+              priority
+              onError={(e) => {
+                // Fallback to initials if image fails to load
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const parent = target.parentElement;
+                if (parent) {
+                  parent.innerHTML = '<div class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-4xl font-bold">MR</div>';
+                }
+              }}
+            />
           </motion.div>
 
           {/* Name and Title */}
