@@ -4,12 +4,10 @@ const nextConfig = {
   images: {
     domains: ['github.com', 'avatars.githubusercontent.com'],
   },
-  // Ensure public directory is properly handled
+  // Ensure proper asset handling
   assetPrefix: '',
   trailingSlash: false,
-  // Output configuration for Vercel
-  output: 'standalone',
-  // Custom webpack config to ensure public assets are copied
+  // Custom webpack config to ensure compatibility
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
